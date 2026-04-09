@@ -1,0 +1,23 @@
+name: CodeStream-CI-CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  kiem-tra-va-dong-goi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Lay ma nguon
+        uses: actions/checkout@v4
+
+      - name: 2. Cai dat Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 3. Chay Test tu file package.json
+        run: npm test
+
+      - name: 4. Build Docker Image (Demo)
+        run: docker build -t codestream-app .
